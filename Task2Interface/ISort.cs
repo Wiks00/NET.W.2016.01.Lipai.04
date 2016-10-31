@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task1.Tests
+namespace Task2Interface
 {
-    public class Class1
+    public interface ISort
     {
+        bool DoSort(int[] first, int[] second, bool invert);
     }
 }
