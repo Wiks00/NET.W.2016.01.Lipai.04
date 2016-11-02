@@ -30,7 +30,7 @@ namespace Task2
             {
                 for (var j = 0; j < array.Length - i - 1; j++)
                 {
-                    if (!func(array[j], array[j + 1], invert)) continue;
+                    if (func(array[j], array[j + 1], invert)) continue;
                     var temp = array[j];
                     array[j] = array[j + 1];
                     array[j + 1] = temp;
@@ -51,9 +51,9 @@ namespace Task2
         {
             if (invert)
             {
-                return first.Sum() > second.Sum();
+                return first.Sum() < second.Sum();
             }
-            return first.Sum() < second.Sum();
+            return first.Sum() > second.Sum();
         }
 
         /// <summary>
@@ -67,9 +67,9 @@ namespace Task2
         {
             if (invert)
             {
-                return first.Min() > second.Min();
+                return first.Min() < second.Min();
             }
-            return first.Min() < second.Min();
+            return first.Min() > second.Min();
         }
 
         /// <summary>
@@ -83,9 +83,9 @@ namespace Task2
         {
             if (invert)
             {
-                return first.Max() > second.Max();
+                return first.Max() < second.Max();
             }
-            return first.Max() < second.Max();
+            return first.Max() > second.Max();
         }
     }
 }

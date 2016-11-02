@@ -44,8 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MaxInvert.cs" />
+    <Compile Include="Max.cs" />
+    <Compile Include="MinInvert.cs" />
+    <Compile Include="Min.cs" />
     <Compile Include="SortLogicTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SumInvert.cs" />
+    <Compile Include="Sum.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Task2Interface\Task2Interface.csproj">

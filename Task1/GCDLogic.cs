@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 namespace Task1
 {
-    public class GCDLogic
+    public class GcdLogic
     {
         /// <summary>
         /// delegate for speed test
         /// </summary>
-        /// <param name="integers">gcd of that integers</param>      
+        /// <param name="integers">Gcd of that integers</param>      
         public delegate int MyTimerDelegate(params int[] integers);
 
+        #region Euclid GCD
         /// <summary>
         /// Calculete Greatest Common Divisor by Euclid rule
         /// </summary>
@@ -22,7 +23,7 @@ namespace Task1
         /// <param name="b">second number</param>
         /// <returns>Greatest Common Divisor of two numbers</returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public static int Gcd(int a, int b)
+        public static int EuclidGcd(int a, int b)
         {
             if(a < 0 || b < 0)
                 throw new ArgumentOutOfRangeException();
@@ -44,12 +45,12 @@ namespace Task1
         /// <param name="c">third number</param>
         /// <returns>Greatest Common Divisor of three numbers</returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public static int Gcd(int a, int b, int c)
+        public static int EuclidGcd(int a, int b, int c)
         {
             if(c < 0)
                 throw new ArgumentOutOfRangeException();
 
-            return Gcd(Gcd(a, b), c);
+            return EuclidGcd(EuclidGcd(a, b), c);
         }
 
         /// <summary>
@@ -58,19 +59,21 @@ namespace Task1
         /// <param name="integers">array of numbers</param>
         /// <returns>Greatest Common Divisor of array of numbers</returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public static int Gcd(params int[] integers)
+        public static int EuclidGcd(params int[] integers)
         {
-            if(integers.Length < 0 || integers.Any(curent => curent < 0))
+            if(integers.Length < 0 || integers.Any(curent => curent < 2))
                 throw new ArgumentOutOfRangeException();
 
             int value = integers[0];
             for (int i = 1; i < integers.Length -1; i++)
             {
-                value = Gcd(value, integers[i]);
+                value = EuclidGcd(value, integers[i]);
             }
-            return Gcd(value, integers[integers.Length -1]);
+            return EuclidGcd(value, integers[integers.Length -1]);
         }
+        #endregion
 
+        #region Euclid Binary GCD
         /// <summary>
         /// Calculete Greatest Common Divisor by binary Euclid rule
         /// </summary>
@@ -78,7 +81,7 @@ namespace Task1
         /// <param name="b">second number</param>
         /// <returns>Greatest Common Divisor of two numbers</returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public static int BinaryGcd(int a, int b)
+        public static int BinaryEuclidGcd(int a, int b)
         {
             if (a < 0 || b < 0)
                 throw new ArgumentOutOfRangeException();
@@ -87,11 +90,11 @@ namespace Task1
             if (b == 0) return a;
             if (a == b) return a;
             if (a == 1 || b == 1) return 1;
-            if ((a % 2 == 0) && (b % 2 == 0)) return 2 * BinaryGcd(a / 2, b / 2);
-            if ((a % 2 == 0) && (b % 2 != 0)) return BinaryGcd(a / 2, b);
-            if ((a % 2 != 0) && (b % 2 == 0)) return BinaryGcd(a, b / 2);
-            if ((a % 2 != 0) && (b % 2 != 0) && b > a) return BinaryGcd(a, (b - a) / 2);
-            return BinaryGcd((a - b) / 2, b);
+            if ((a % 2 == 0) && (b % 2 == 0)) return 2 * BinaryEuclidGcd(a / 2, b / 2);
+            if ((a % 2 == 0) && (b % 2 != 0)) return BinaryEuclidGcd(a / 2, b);
+            if ((a % 2 != 0) && (b % 2 == 0)) return BinaryEuclidGcd(a, b / 2);
+            if ((a % 2 != 0) && (b % 2 != 0) && b > a) return BinaryEuclidGcd(a, (b - a) / 2);
+            return BinaryEuclidGcd((a - b) / 2, b);
         }
 
         /// <summary>
@@ -102,12 +105,12 @@ namespace Task1
         /// <param name="c">third number</param>
         /// <returns>Greatest Common Divisor of three numbers</returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public static int BinaryGcd(int a, int b,int c)
+        public static int BinaryEuclidGcd(int a, int b,int c)
         {
             if (c < 0)
                 throw new ArgumentOutOfRangeException();
 
-            return BinaryGcd(BinaryGcd(a, b), c);
+            return BinaryEuclidGcd(BinaryEuclidGcd(a, b), c);
         }
 
         /// <summary>
@@ -116,19 +119,22 @@ namespace Task1
         /// <param name="integers">array of numbers</param>
         /// <returns>Greatest Common Divisor of array of numbers</returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public static int BinaryGcd(params int[] integers)
+        public static int BinaryEuclidGcd(params int[] integers)
         {
-            if (integers.Length < 0 || integers.Any(curent => curent < 0))
+            if (integers.Length < 0 || integers.Any(curent => curent < 2))
                 throw new ArgumentOutOfRangeException();
 
             int value = integers[0];
             for (int i = 1; i < integers.Length - 1; i++)
             {
-                value = BinaryGcd(value, integers[i]);
+                value = BinaryEuclidGcd(value, integers[i]);
             }
-            return BinaryGcd(value, integers[integers.Length - 1]);
+            return BinaryEuclidGcd(value, integers[integers.Length - 1]);
         }
+        #endregion
 
+        #region Speed Tst
+       
         /// <summary>
         /// Test speed of method
         /// </summary>
@@ -173,5 +179,6 @@ namespace Task1
             watch.Stop();
             return watch.ElapsedTicks;
         }
+        #endregion
     }
 }

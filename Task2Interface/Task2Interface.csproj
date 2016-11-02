@@ -41,11 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ISort.cs" />
-    <Compile Include="Max.cs" />
-    <Compile Include="Min.cs" />
     <Compile Include="SortLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sum.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
