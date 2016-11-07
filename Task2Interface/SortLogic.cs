@@ -4,7 +4,7 @@ namespace Task2Interface
 {
     public class SortLogic
     {
-        public static int[][] Sort(int[][] array, ISort sorter)
+        public static void Sort(int[][] array, ISort sorter)
         {
             if (ReferenceEquals(array, null) || ReferenceEquals(sorter, null))
                 throw new NullReferenceException();
@@ -13,12 +13,15 @@ namespace Task2Interface
                 for (var j = 0; j < array.Length - i - 1; j++)
                 {
                     if (sorter.DoSort(array[j], array[j + 1]) > 0) continue;
-                    var temp = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = temp;
+                    Sort(array, i, j);
                 }
+        }
 
-            return array;
+        private static void Sort(int[][] array, int i , int j)
+        {
+            var temp = array[j];
+            array[j] = array[j + 1];
+            array[j + 1] = temp;
         }
     }
 }
