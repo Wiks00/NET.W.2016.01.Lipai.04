@@ -1,27 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Task2Interface
 {
     public class SortLogic
     {
-        public static void Sort(int[][] array, ISort sorter)
+        public static void Sort(int[][] array, IComparer<int[]> sorter)
         {
             if (ReferenceEquals(array, null) || ReferenceEquals(sorter, null))
-                throw new NullReferenceException();
+                throw new ArgumentNullException();
 
             for (var i = 0; i < array.Length; i++)
                 for (var j = 0; j < array.Length - i - 1; j++)
                 {
-                    if (sorter.DoSort(array[j], array[j + 1]) > 0) continue;
-                    Sort(array, i, j);
+                    if (sorter.Compare(array[j], array[j + 1]) > 0) continue;
+                        Swap(ref array[j],ref array[j + 1]);
                 }
         }
 
-        private static void Sort(int[][] array, int i , int j)
+        private static void Swap(ref int[] i , ref int[] j)
         {
-            var temp = array[j];
-            array[j] = array[j + 1];
-            array[j + 1] = temp;
+            var temp = i;
+            i = j;
+            j = temp;
         }
     }
 }

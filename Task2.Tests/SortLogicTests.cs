@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using Task2Interface;
 
@@ -37,20 +38,21 @@ namespace Task2.Tests
 
         private class SelectSort
         {
-            public static ISort Sum { get; } = new Sum();
-            public static ISort SumInvert { get; } = new SumInvert();
-            public static ISort Min { get; } = new Min();
-            public static ISort MinInvert { get; } = new MinInvert();
-            public static ISort Max { get; } = new Max();
-            public static ISort MaxInvert { get; } = new MaxInvert();
+            public static IComparer<int[]> Sum { get; } = new Sum();
+            public static IComparer<int[]> SumInvert { get; } = new SumInvert();
+            public static IComparer<int[]> Min { get; } = new Min();
+            public static IComparer<int[]> MinInvert { get; } = new MinInvert();
+            public static IComparer<int[]> Max { get; } = new Max();
+            public static IComparer<int[]> MaxInvert { get; } = new MaxInvert();
         }
 
 
         [Test]
         [TestCaseSource(nameof(sourceListsForInterfaceMethod))]
-        public void Sort_SortJaggedArrayWithFewSolutionsByInterface(int[][] array, ISort sorter, int returnValue)
+        public void Sort_SortJaggedArrayWithFewSolutionsByInterface(int[][] array, IComparer<int[]> sorter, int returnValue)
         {
-            Assert.AreEqual(Task2Interface.SortLogic.Sort(array, sorter)[0][0], returnValue);
+            Task2Interface.SortLogic.Sort(array, sorter);
+            Assert.AreEqual(array[0][0], returnValue);
         }
 
         [Test]
@@ -62,10 +64,10 @@ namespace Task2.Tests
 
         [Test]
         [TestCaseSource(nameof(sourceListsForNullReferenceException))]
-        public void Sort_TestForNullReferenceException(int[][] array, ISort sorter)
+        public void Sort_TestForArgumentNullException(int[][] array, IComparer<int[]> sorter)
         {
             Assert.That(() => Task2Interface.SortLogic.Sort(array, sorter),
-                Throws.TypeOf<NullReferenceException>());
+                Throws.TypeOf<ArgumentNullException>());
         }
     }
 }

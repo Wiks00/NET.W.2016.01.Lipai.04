@@ -1,12 +1,17 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Task2Interface
 {
-    public class Min : ISort
+    public class Min : IComparer<int[]>
     {
-        public int DoSort(int[] first, int[] second)
+        public int Compare(int[] x, int[] y)
         {
-            return first.Min() - second.Min();
+            if (ReferenceEquals(x, null))
+                return 1;
+            if (ReferenceEquals(y, null))
+                return -1;
+            return x.Min() - y.Min();
         }
     }
 }
