@@ -23,11 +23,25 @@ namespace Task2.Tests
             new object[] {testArray, SelectSort.Max, 14}
         };
 
+        private static readonly object[] sourceListsForDelegeteToInterfaceMethod =
+        {
+            new object[] {testArray, (Func<int[], int[], int>)SelectSort.Sum.Compare, 0},
+            new object[] {testArray, (Func<int[], int[], int>)SelectSort.MinInvert.Compare, 1},
+            new object[] {testArray, (Func<int[], int[], int>)SelectSort.Max.Compare, 14}
+        };
+
+        private static readonly object[] sourceListsForInterfaceToDelegeteMethod =
+      {
+            new object[] {testArray, SelectSort.Sum, 0},
+            new object[] {testArray, SelectSort.MinInvert, 1},
+            new object[] {testArray, SelectSort.Max, 14}
+        };
+
         private static readonly object[] sourceListsForDelegeteMethod =
         {
-            new object[] {testArray, new SortLogic.SortMethod(SortLogic.Sum), 0, false},
-            new object[] {testArray, new SortLogic.SortMethod(SortLogic.Min), 1 , true},
-            new object[] {testArray, new SortLogic.SortMethod(SortLogic.Max), 14 , false}
+            new object[] {testArray, (Func<int[],int[],int>)SelectSort.Sum.Compare, 0},
+            new object[] {testArray, (Func<int[], int[], int>)SelectSort.MinInvert.Compare, 1},
+            new object[] {testArray, (Func<int[], int[], int>)SelectSort.Max.Compare, 14}
         };
 
         private static readonly object[] sourceListsForNullReferenceException =
@@ -51,15 +65,32 @@ namespace Task2.Tests
         [TestCaseSource(nameof(sourceListsForInterfaceMethod))]
         public void Sort_SortJaggedArrayWithFewSolutionsByInterface(int[][] array, IComparer<int[]> sorter, int returnValue)
         {
-            Task2Interface.SortLogic.Sort(array, sorter);
+            SortLogic.Sort(array, sorter);
+            Assert.AreEqual(array[0][0], returnValue);
+        }
+
+        [Test]
+        [TestCaseSource(nameof(sourceListsForDelegeteToInterfaceMethod))]
+        public void Sort_SortJaggedArrayWithFewSolutionsByDelegateToInterface(int[][] array, Func<int[],int[],int> func, int returnValue)
+        {
+            SortLogic.Sort(array, func);
+            Assert.AreEqual(array[0][0], returnValue);
+        }
+
+        [Test]
+        [TestCaseSource(nameof(sourceListsForInterfaceToDelegeteMethod))]
+        public void Sort_SortJaggedArrayWithFewSolutionsByInterfaceToDelegete(int[][] array, IComparer<int[]> sorter, int returnValue)
+        {
+            SortLogicReverse.Sort(array, sorter);
             Assert.AreEqual(array[0][0], returnValue);
         }
 
         [Test]
         [TestCaseSource(nameof(sourceListsForDelegeteMethod))]
-        public void Sort_SortJaggedArrayWithFewSolutionsByDelegate(int[][] array, SortLogic.SortMethod func, int returnValue,bool invert)
+        public void Sort_SortJaggedArrayWithFewSolutionsByDelegate(int[][] array, Func<int[], int[], int> func, int returnValue)
         {
-            Assert.AreEqual(SortLogic.Sort(array, func, invert)[0][0], returnValue);
+            SortLogicReverse.Sort(array, func);
+            Assert.AreEqual(array[0][0], returnValue);
         }
 
         [Test]

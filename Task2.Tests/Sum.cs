@@ -5,6 +5,12 @@ namespace Task2Interface
 {
     public class Sum : IComparer<int[]>
     {
+        /// <summary>
+        /// Compare two sz-arrays by Sum of elements in line
+        /// </summary>
+        /// <param name="x">first array</param>
+        /// <param name="y">second array</param>
+        /// <returns>defenition betwen</returns>
         public int Compare(int[] x, int[] y)
         {
             if (ReferenceEquals(x, null))

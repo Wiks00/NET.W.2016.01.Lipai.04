@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using static Task1.GcdLogic;
 
@@ -56,7 +52,7 @@ namespace Task1.Tests
 
         [Test, TestCaseSource(nameof(sourceListsForSpeedTest))]
         public void TestSpeed_TestSpeed(MyTimerDelegate method,params int[] ints)
-        {
+        {         
             Console.WriteLine(ints.Length > 2
                 ? TestSpeed(method, ints).ToString()
                 : TestSpeed(method, ints[0], ints[1]).ToString());

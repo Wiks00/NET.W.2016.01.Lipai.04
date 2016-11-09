@@ -40,7 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ISort.cs" />
+    <Compile Include="DelegateAdapter.cs" />
+    <Compile Include="SortLogicReversr.cs" />
     <Compile Include="SortLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

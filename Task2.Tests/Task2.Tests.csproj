@@ -54,17 +54,13 @@
     <Compile Include="Sum.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Task2Interface\Task2Interface.csproj">
       <Project>{c3cd295c-42af-4173-9539-cc27f6367e55}</Project>
       <Name>Task2Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Task2\Task2.csproj">
-      <Project>{5ef4c54c-6b46-4616-a0e7-31db3af16bd3}</Project>
-      <Name>Task2</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
